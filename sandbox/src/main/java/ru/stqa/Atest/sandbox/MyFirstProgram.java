@@ -1,4 +1,6 @@
-public class MyFirstProgramm 
+package ru.stqa.Atest.sandbox;
+
+public class MyFirstProgram
 {
 	public static void main (String [] agrs ) 
 	{
