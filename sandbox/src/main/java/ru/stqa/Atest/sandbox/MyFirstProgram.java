@@ -1,10 +1,8 @@
 package ru.stqa.Atest.sandbox;
 
-public class MyFirstProgram
-{
-	public static void main (String [] agrs ) 
-	{
-	
-System.out.println("Hello World");
-	}
+public class MyFirstProgram {
+  public static void main(String[] agrs) {
+
+    System.out.println("Hello World");
+  }
 }
