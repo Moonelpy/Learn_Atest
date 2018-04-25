@@ -2,13 +2,18 @@ package calc;
 
 public class Point {
 
-  public int x;
-  public  int y;
+  public double x;
+  public  double y;
 
 
-  public void Point (int x, int y) {
+  public Point (double x, double y) {
     this.x = x;
     this.y = y;
+  }
+
+  public void distance(Point p1, Point p2) {
+    double x = p2.x - p1.x;
+    double y = p2.y - p1.y;
 
   }
 
