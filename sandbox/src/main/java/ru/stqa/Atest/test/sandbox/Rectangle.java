@@ -1,4 +1,4 @@
-package ru.stqa.Atest.sandbox;
+package ru.stqa.Atest.test.sandbox;
 
 public class Rectangle {
   public double a;
@@ -7,5 +7,11 @@ public class Rectangle {
   public Rectangle(double a, double b) {
     this.a = a;
     this.b = b;
+
   }
+
+  public double area(){
+    return  this.a * this.b;
+    }
+
 }
