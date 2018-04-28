@@ -8,8 +8,10 @@ public class SquereTest {
 
   @Test
     public void testarea() {
-      Squere s = new Squere(5);
-    Assert.assertEquals(s.area(), 25.0);
+        Squere s = new Squere(5);
+        Assert.assertEquals(s.area(), 25.0);
     }
   }
+
+
 
