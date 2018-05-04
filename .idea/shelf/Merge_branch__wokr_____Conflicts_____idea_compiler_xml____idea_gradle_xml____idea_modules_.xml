@@ -1,0 +1,19 @@
+<changelist name="Merge_branch_'wokr'__#_Conflicts__#__idea_compiler_xml_#__idea_gradle_xml_#__idea_modules_" date="1525423792401" recycled="false">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Merge_branch_'wokr'__#_Conflicts__#__idea_compiler_xml_#__idea_gradle_xml_#__idea_modules_/shelved.patch" />
+  <option name="DESCRIPTION" value="Merge branch 'wokr'  # Conflicts: #&#9;.idea/compiler.xml #&#9;.idea/gradle.xml #&#9;.idea/modules.xml" />
+  <binary>
+    <option name="BEFORE_PATH" value="addressbook-web-tests/out/test/classes/ru/stqa/pft/addressbook/appmanager/ApplictionManager.class" />
+    <option name="AFTER_PATH" value="addressbook-web-tests/out/test/classes/ru/stqa/pft/addressbook/appmanager/ApplictionManager.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Merge_branch_'wokr'__#_Conflicts__#__idea_compiler_xml_#__idea_gradle_xml_#__idea_modules_/ApplictionManager.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="addressbook-web-tests/out/test/classes/ru/stqa/pft/addressbook/appmanager/HelperBase.class" />
+    <option name="AFTER_PATH" value="addressbook-web-tests/out/test/classes/ru/stqa/pft/addressbook/appmanager/HelperBase.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Merge_branch_'wokr'__#_Conflicts__#__idea_compiler_xml_#__idea_gradle_xml_#__idea_modules_/HelperBase.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="addressbook-web-tests/out/test/classes/ru/stqa/pft/addressbook/tests/GroupDeletionTest.class" />
+    <option name="AFTER_PATH" value="addressbook-web-tests/out/test/classes/ru/stqa/pft/addressbook/tests/GroupDeletionTest.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Merge_branch_'wokr'__#_Conflicts__#__idea_compiler_xml_#__idea_gradle_xml_#__idea_modules_/GroupDeletionTest.class" />
+  </binary>
+</changelist>

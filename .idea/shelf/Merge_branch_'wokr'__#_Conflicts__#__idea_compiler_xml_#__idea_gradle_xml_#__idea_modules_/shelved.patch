@@ -1,0 +1,317 @@
+Index: addressbook-web-tests/src/test/java/ru/stqa/pft/addressbook/appmanager/ApplictionManager.java
+===================================================================
+--- addressbook-web-tests/src/test/java/ru/stqa/pft/addressbook/appmanager/ApplictionManager.java	(revision a671978d9799a3f90d7cb6ec97773f2866388f80)
++++ addressbook-web-tests/src/test/java/ru/stqa/pft/addressbook/appmanager/ApplictionManager.java	(revision a671978d9799a3f90d7cb6ec97773f2866388f80)
+@@ -1,40 +0,0 @@
+-package ru.stqa.pft.addressbook.appmanager;
+-
+-import org.openqa.selenium.firefox.FirefoxDriver;
+-
+-import java.util.concurrent.TimeUnit;
+-
+-public class ApplictionManager {
+-  FirefoxDriver wd;
+-
+-
+-  private NavigationHelper navigationHelper;
+-  private GroupHelper groupHelper;
+-  private SessionHelper sessionHelper;
+-
+-
+-
+-  public void init() {
+-    sessionHelper = new SessionHelper(wd);
+-    wd = new FirefoxDriver();
+-    wd.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+-    wd.get("http://localhost/addressbook/");
+-    sessionHelper.login("admin", "secret");
+-    groupHelper = new GroupHelper(wd);
+-    navigationHelper = new NavigationHelper(wd);
+-
+-  }
+-
+-
+-  public void stop() {
+-    wd.quit();
+-  }
+-
+-  public GroupHelper getGroupHelper() {
+-    return groupHelper;
+-  }
+-
+-  public NavigationHelper getNavigationHelper() {
+-    return navigationHelper;
+-  }
+-}
+Index: addressbook-web-tests/src/test/java/ru/stqa/pft/addressbook/appmanager/GroupHelper.java
+===================================================================
+--- addressbook-web-tests/src/test/java/ru/stqa/pft/addressbook/appmanager/GroupHelper.java	(revision a671978d9799a3f90d7cb6ec97773f2866388f80)
++++ addressbook-web-tests/src/test/java/ru/stqa/pft/addressbook/appmanager/GroupHelper.java	(revision a671978d9799a3f90d7cb6ec97773f2866388f80)
+@@ -1,38 +0,0 @@
+-package ru.stqa.pft.addressbook.appmanager;
+-
+-import org.openqa.selenium.By;
+-import org.openqa.selenium.firefox.FirefoxDriver;
+-import ru.stqa.pft.addressbook.model.GroupData;
+-
+-public class GroupHelper extends HelperBase {
+-
+-  public GroupHelper(FirefoxDriver wd) {
+-    super(wd);
+-  }
+-
+-  public void returnToGroupPage() {
+-    click(By.linkText("group page"));
+-  }
+-
+-  public void submitGroupCreation() {
+-    click(By.name("submit"));
+-  }
+-
+-  public void fillGroupForm(GroupData groupData) {
+-    type(By.name("group_name"), groupData.getName());
+-    type(By.name("group_header"), groupData.getHeader());
+-    type(By.name("group_footer"), groupData.getFooter());
+-  }
+-
+-  public void initGroupCreation() {
+-    click(By.name("new"));
+-  }
+-
+-  public void deleteSelectedGroups() {
+-    click(By.name("delete"));
+-  }
+-
+-  public void selectGroup() {
+-    click(By.name("selected[]"));
+-  }
+-}
+Index: addressbook-web-tests/src/test/java/ru/stqa/pft/addressbook/appmanager/HelperBase.java
+===================================================================
+--- addressbook-web-tests/src/test/java/ru/stqa/pft/addressbook/appmanager/HelperBase.java	(revision a671978d9799a3f90d7cb6ec97773f2866388f80)
++++ addressbook-web-tests/src/test/java/ru/stqa/pft/addressbook/appmanager/HelperBase.java	(revision a671978d9799a3f90d7cb6ec97773f2866388f80)
+@@ -1,33 +0,0 @@
+-package ru.stqa.pft.addressbook.appmanager;
+-
+-import org.openqa.selenium.By;
+-import org.openqa.selenium.NoAlertPresentException;
+-import org.openqa.selenium.firefox.FirefoxDriver;
+-
+-public class HelperBase {
+-
+-
+-  protected FirefoxDriver wd;
+-
+-  public HelperBase(FirefoxDriver wd) {
+-    this.wd=wd;
+-  }
+-
+-  protected void click(By locator) {
+-    wd.findElement(locator).click();
+-  }
+-
+-  protected void type(By locator, String text) {
+-    click(locator);
+-    wd.findElement(locator).clear();
+-    wd.findElement(locator).sendKeys(text);
+-  }
+-  public  boolean isAlertPresent() {
+-    try {
+-      wd.switchTo().alert();
+-      return true;
+-    } catch (NoAlertPresentException e) {
+-      return false;
+-    }
+-  }
+-}
+Index: addressbook-web-tests/src/test/java/ru/stqa/pft/addressbook/appmanager/NavigationHelper.java
+===================================================================
+--- addressbook-web-tests/src/test/java/ru/stqa/pft/addressbook/appmanager/NavigationHelper.java	(revision a671978d9799a3f90d7cb6ec97773f2866388f80)
++++ addressbook-web-tests/src/test/java/ru/stqa/pft/addressbook/appmanager/NavigationHelper.java	(revision a671978d9799a3f90d7cb6ec97773f2866388f80)
+@@ -1,16 +0,0 @@
+-package ru.stqa.pft.addressbook.appmanager;
+-
+-import org.openqa.selenium.By;
+-import org.openqa.selenium.firefox.FirefoxDriver;
+-
+-public class NavigationHelper extends HelperBase{
+-
+-
+-  public NavigationHelper(FirefoxDriver wd) {
+-    super(wd);
+-  }
+-
+-  public void gotoGroupPage() {
+-    click(By.linkText("groups"));
+-  }
+-}
+Index: addressbook-web-tests/src/test/java/ru/stqa/pft/addressbook/appmanager/SessionHelper.java
+===================================================================
+--- addressbook-web-tests/src/test/java/ru/stqa/pft/addressbook/appmanager/SessionHelper.java	(revision a671978d9799a3f90d7cb6ec97773f2866388f80)
++++ addressbook-web-tests/src/test/java/ru/stqa/pft/addressbook/appmanager/SessionHelper.java	(revision a671978d9799a3f90d7cb6ec97773f2866388f80)
+@@ -1,23 +0,0 @@
+-package ru.stqa.pft.addressbook.appmanager;
+-
+-import org.openqa.selenium.By;
+-import org.openqa.selenium.firefox.FirefoxDriver;
+-
+-public class SessionHelper extends HelperBase {
+-
+-
+-  private FirefoxDriver wd;
+-
+-  public SessionHelper(FirefoxDriver wd) {
+-
+-    super(wd);
+-  }
+-
+-  public void login(String username, String password) {
+-    click(By.cssSelector("html"));
+-    type(By.name("user"), username);
+-    type(By.name("pass"), password);
+-    click(By.xpath("//form[@id='LoginForm']/input[3]"));
+-
+-  }
+-}
+\ No newline at end of file
+Index: addressbook-web-tests/src/test/java/ru/stqa/pft/addressbook/model/GroupData.java
+===================================================================
+--- addressbook-web-tests/src/test/java/ru/stqa/pft/addressbook/model/GroupData.java	(revision a671978d9799a3f90d7cb6ec97773f2866388f80)
++++ addressbook-web-tests/src/test/java/ru/stqa/pft/addressbook/model/GroupData.java	(revision a671978d9799a3f90d7cb6ec97773f2866388f80)
+@@ -1,25 +0,0 @@
+-package ru.stqa.pft.addressbook.model;
+-
+-public class GroupData {
+-  private final String name;
+-  private final String header;
+-  private final String footer;
+-
+-  public GroupData(String name, String header, String footer) {
+-    this.name = name;
+-    this.header = header;
+-    this.footer = footer;
+-  }
+-
+-  public String getName() {
+-    return name;
+-  }
+-
+-  public String getHeader() {
+-    return header;
+-  }
+-
+-  public String getFooter() {
+-    return footer;
+-  }
+-}
+Index: addressbook-web-tests/src/test/java/ru/stqa/pft/addressbook/tests/GroupCreationTests.java
+===================================================================
+--- addressbook-web-tests/src/test/java/ru/stqa/pft/addressbook/tests/GroupCreationTests.java	(revision a671978d9799a3f90d7cb6ec97773f2866388f80)
++++ addressbook-web-tests/src/test/java/ru/stqa/pft/addressbook/tests/GroupCreationTests.java	(revision a671978d9799a3f90d7cb6ec97773f2866388f80)
+@@ -1,18 +0,0 @@
+-package ru.stqa.pft.addressbook.tests;
+-
+-import org.testng.annotations.Test;
+-import ru.stqa.pft.addressbook.model.GroupData;
+-
+-
+-public class GroupCreationTests extends TestBase{
+-
+-  @Test
+-  public void testGroupCreation() {
+-    app.getNavigationHelper().gotoGroupPage();
+-    app.getGroupHelper().initGroupCreation();
+-    app.getGroupHelper().fillGroupForm(new GroupData("test1", "test2", "test3"));
+-    app.getGroupHelper().submitGroupCreation();
+-    app.getGroupHelper().returnToGroupPage();
+-  }
+-
+-}
+Index: addressbook-web-tests/src/test/java/ru/stqa/pft/addressbook/tests/GroupDeletionTest.java
+===================================================================
+--- addressbook-web-tests/src/test/java/ru/stqa/pft/addressbook/tests/GroupDeletionTest.java	(revision a671978d9799a3f90d7cb6ec97773f2866388f80)
++++ addressbook-web-tests/src/test/java/ru/stqa/pft/addressbook/tests/GroupDeletionTest.java	(revision a671978d9799a3f90d7cb6ec97773f2866388f80)
+@@ -1,19 +0,0 @@
+-package ru.stqa.pft.addressbook.tests;
+-
+-import org.testng.annotations.Test;
+-
+-
+-
+-public class GroupDeletionTest extends TestBase {
+-
+-
+-    @Test
+-    public void testGroupDeletion() {
+-      app.getNavigationHelper().gotoGroupPage();
+-      app.getGroupHelper().selectGroup();
+-      app.getGroupHelper().deleteSelectedGroups();
+-      app.getGroupHelper().returnToGroupPage();
+-    }
+-
+-}
+-
+Index: addressbook-web-tests/src/test/java/ru/stqa/pft/addressbook/tests/TestBase.java
+===================================================================
+--- addressbook-web-tests/src/test/java/ru/stqa/pft/addressbook/tests/TestBase.java	(revision a671978d9799a3f90d7cb6ec97773f2866388f80)
++++ addressbook-web-tests/src/test/java/ru/stqa/pft/addressbook/tests/TestBase.java	(revision a671978d9799a3f90d7cb6ec97773f2866388f80)
+@@ -1,21 +0,0 @@
+-package ru.stqa.pft.addressbook.tests;
+-
+-import org.testng.annotations.AfterMethod;
+-import org.testng.annotations.BeforeMethod;
+-import ru.stqa.pft.addressbook.appmanager.ApplictionManager;
+-
+-public class TestBase {
+-
+-  protected final ApplictionManager app = new ApplictionManager();
+-
+-  @BeforeMethod
+-  public void setUp() throws Exception {
+-    app.init();
+-  }
+-
+-  @AfterMethod
+-  public void tearDown() {
+-    app.stop();
+-  }
+-
+-}
+Index: addressbook-web-tests/addressbook-web-tests.iml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- addressbook-web-tests/addressbook-web-tests.iml	(date 1525423708343)
++++ addressbook-web-tests/addressbook-web-tests.iml	(date 1525423708343)
+@@ -0,0 +1,9 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<module type="WEB_MODULE" version="4">
++  <component name="NewModuleRootManager" inherit-compiler-output="true">
++    <exclude-output />
++    <content url="file://$MODULE_DIR$" />
++    <orderEntry type="inheritedJdk" />
++    <orderEntry type="sourceFolder" forTests="false" />
++  </component>
++</module>
+\ No newline at end of file
+Index: .idea/modules.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"ProjectModuleManager\">\n    <modules>\n      <module fileurl=\"file://$PROJECT_DIR$/.idea/modules/addressbook-web-tests.iml\" filepath=\"$PROJECT_DIR$/.idea/modules/addressbook-web-tests.iml\" />\n      <module fileurl=\"file://$PROJECT_DIR$/.idea/modules/addressbook-web-tests_main.iml\" filepath=\"$PROJECT_DIR$/.idea/modules/addressbook-web-tests_main.iml\" group=\"addressbook-web-tests\" />\n      <module fileurl=\"file://$PROJECT_DIR$/.idea/modules/addressbook-web-tests_test.iml\" filepath=\"$PROJECT_DIR$/.idea/modules/addressbook-web-tests_test.iml\" group=\"addressbook-web-tests\" />\n      <module fileurl=\"file://$PROJECT_DIR$/.idea/modules/sandbox.iml\" filepath=\"$PROJECT_DIR$/.idea/modules/sandbox.iml\" />\n      <module fileurl=\"file://$PROJECT_DIR$/.idea/modules/sandbox_main.iml\" filepath=\"$PROJECT_DIR$/.idea/modules/sandbox_main.iml\" group=\"sandbox\" />\n      <module fileurl=\"file://$PROJECT_DIR$/.idea/modules/sandbox_test.iml\" filepath=\"$PROJECT_DIR$/.idea/modules/sandbox_test.iml\" group=\"sandbox\" />\n    </modules>\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/modules.xml	(revision a671978d9799a3f90d7cb6ec97773f2866388f80)
++++ .idea/modules.xml	(date 1525423708379)
+@@ -2,9 +2,7 @@
+ <project version="4">
+   <component name="ProjectModuleManager">
+     <modules>
+-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/addressbook-web-tests.iml" filepath="$PROJECT_DIR$/.idea/modules/addressbook-web-tests.iml" />
+-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/addressbook-web-tests_main.iml" filepath="$PROJECT_DIR$/.idea/modules/addressbook-web-tests_main.iml" group="addressbook-web-tests" />
+-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/addressbook-web-tests_test.iml" filepath="$PROJECT_DIR$/.idea/modules/addressbook-web-tests_test.iml" group="addressbook-web-tests" />
++      <module fileurl="file://$PROJECT_DIR$/addressbook-web-tests/addressbook-web-tests.iml" filepath="$PROJECT_DIR$/addressbook-web-tests/addressbook-web-tests.iml" group="sandbox" />
+       <module fileurl="file://$PROJECT_DIR$/.idea/modules/sandbox.iml" filepath="$PROJECT_DIR$/.idea/modules/sandbox.iml" />
+       <module fileurl="file://$PROJECT_DIR$/.idea/modules/sandbox_main.iml" filepath="$PROJECT_DIR$/.idea/modules/sandbox_main.iml" group="sandbox" />
+       <module fileurl="file://$PROJECT_DIR$/.idea/modules/sandbox_test.iml" filepath="$PROJECT_DIR$/.idea/modules/sandbox_test.iml" group="sandbox" />
