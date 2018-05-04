@@ -14,11 +14,10 @@ public class SessionHelper extends HelperBase {
   }
 
   public void login(String username, String password) {
+    click(By.cssSelector("html"));
     type(By.name("user"), username);
     type(By.name("pass"), password);
-    click(By.cssSelector("html"));
     click(By.xpath("//form[@id='LoginForm']/input[3]"));
-
 
   }
 }

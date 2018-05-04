@@ -15,13 +15,14 @@ public class ApplictionManager {
 
 
   public void init() {
+    sessionHelper = new SessionHelper(wd);
     wd = new FirefoxDriver();
     wd.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
     wd.get("http://localhost/addressbook/");
     sessionHelper.login("admin", "secret");
     groupHelper = new GroupHelper(wd);
     navigationHelper = new NavigationHelper(wd);
-    sessionHelper = new SessionHelper(wd);
+
   }
 
 
