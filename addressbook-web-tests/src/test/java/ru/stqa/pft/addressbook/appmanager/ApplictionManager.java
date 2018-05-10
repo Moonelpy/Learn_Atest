@@ -11,7 +11,7 @@ public class ApplictionManager {
   private NavigationHelper navigationHelper;
   private GroupHelper groupHelper;
   private SessionHelper sessionHelper;
-  private ContactHelper contactHelper;
+
 
 
 
@@ -35,9 +35,6 @@ public class ApplictionManager {
     return groupHelper;
   }
 
-  public ContactHelper getContactHelper() {
-    return contactHelper;
-  }
 
   public NavigationHelper getNavigationHelper() {
     return navigationHelper;
